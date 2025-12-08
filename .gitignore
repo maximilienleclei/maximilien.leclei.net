@@ -1,0 +1,16 @@
+# Node.js dependencies
+node_modules/
+
+# Keep package-lock.json (should be committed)
+# package-lock.json
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db

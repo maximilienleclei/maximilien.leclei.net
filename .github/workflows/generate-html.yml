@@ -1,0 +1,40 @@
+name: Generate HTML from Markdown
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'markdown/**'
+      - 'generate-html.js'
+      - 'styles.css'
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate HTML files
+        run: node generate-html.js
+
+      - name: Commit generated files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html technological_approach.html blog/
+          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-generate HTML from markdown [skip ci]"
+          git push

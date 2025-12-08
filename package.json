@@ -1,0 +1,17 @@
+{
+  "name": "maximilien-leclei-net",
+  "version": "1.0.0",
+  "description": "Personal website with automated markdown to HTML generation",
+  "main": "generate-html.js",
+  "scripts": {
+    "build": "node generate-html.js",
+    "test": "node generate-html.js && echo 'Build successful'"
+  },
+  "keywords": ["personal-website", "markdown", "blog"],
+  "author": "Maximilien Le Cleï",
+  "license": "MIT",
+  "dependencies": {
+    "markdown-it": "^14.0.0"
+  },
+  "devDependencies": {}
+}

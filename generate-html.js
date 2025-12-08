@@ -56,7 +56,7 @@ function generateHeader(blogDropdown, iconPath = '') {
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li class="dropdown">
-                        <a href="/#blog" aria-haspopup="true">Blog</a>
+                        <a href="#" class="static-link" onclick="return false;" aria-haspopup="true">Blog</a>
                         <ul class="dropdown-menu">
 ${blogDropdown}
                         </ul>
@@ -171,8 +171,9 @@ function generateBlogDropdown(blogFiles) {
     .filter(blog => blog.num > 0)
     .sort((a, b) => b.num - a.num);
 
+  // CHANGED: Removed ${blog.num}. from the template string below
   return sortedBlogs
-    .map(blog => `                    <li><a href="/blog/${blog.file.replace('.md', '.html')}">${blog.num}. ${blog.title}</a></li>`)
+    .map(blog => `                    <li><a href="/blog/${blog.file.replace('.md', '.html')}">${blog.title}</a></li>`)
     .join('\n');
 }
 
@@ -204,8 +205,9 @@ function generateHomepage(blogFiles, blogDropdown) {
 
     const separator = index < sortedBlogs.length - 1 ? '            <hr class="blog-separator">\n\n' : '';
 
+    // CHANGED HERE: I removed "${blog.num}. " from the <h2> tag below
     return `            <article class="blog-post" id="post-${blog.num}">
-                <h2>${blog.num}. ${title}</h2>
+                <h2>${title}</h2>
                 <div class="blog-content">
 ${contentWithoutTitle}                </div>
             </article>

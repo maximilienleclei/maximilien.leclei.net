@@ -417,3 +417,24 @@ main {
     min-width: 400px;
   }
 }
+
+/* 2. MAKE "BLOG" LOOK UNCLICKABLE */
+.static-link {
+    cursor: default; /* Arrow cursor instead of pointer hand */
+}
+/* Optional: keep it white on hover so it doesn't look interactive */
+.static-link:hover {
+    opacity: 1 !important; 
+}
+
+/* 3. FIX MARKDOWN HORIZONTAL RULE (---) SPACING */
+/* This targets <hr> tags created by markdown inside your content areas */
+.blog-content hr, 
+.tech-approach hr, 
+.introduction hr {
+    border: none;
+    border-top: 1px solid #333; /* Dark grey line */
+    margin-top: 30px;           /* Space above line */
+    margin-bottom: 30px;        /* Space below line (Fixes "skipping a line") */
+    display: block;
+}

@@ -39,6 +39,12 @@ function markdownToHTML(markdown) {
   // Post-process: Convert [N] to <sup>[N]</sup> for footnotes
   html = html.replace(/\[(\d+)\]/g, '<sup>[$1]</sup>');
 
+  // Post-process: Make bare URLs clickable while preserving the displayed text
+  html = html.replace(
+    /(^|[\s>])(https?:\/\/[^\s<]+)/g,
+    '$1<a href="$2">$2</a>'
+  );
+
   // Post-process: Convert internal references to links
   html = html.replace(/\[Artificial Wisdom Research\]/g, '<a href="/artificial_wisdom_research.html">Artificial Wisdom Research</a>');
 

@@ -35,6 +35,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add index.html technological_approach.html blog/
+          git add -A index.html artificial_wisdom_research.html technological_approach.html blog/
           git diff --quiet && git diff --staged --quiet || git commit -m "Auto-generate HTML from markdown [skip ci]"
           git push

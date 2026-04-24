@@ -12,7 +12,8 @@ const md = new MarkdownIt({
 
 // Directories
 const MARKDOWN_DIR = 'markdown';
-const BLOG_DIR = path.join(MARKDOWN_DIR, 'blog');
+const UNITS_DIR = path.join(MARKDOWN_DIR, 'units');
+const RESEARCH_FILE = path.join(MARKDOWN_DIR, 'artificial_wisdom_research.md');
 
 // Helper: Read markdown file
 function readMarkdown(filepath) {
@@ -25,8 +26,8 @@ function extractTitle(markdown) {
   return match ? match[1] : 'Untitled';
 }
 
-// Helper: Extract number from blog filename (e.g., "01.md" -> 1)
-function extractBlogNumber(filename) {
+// Helper: Extract number from filename (e.g., "01.md" -> 1)
+function extractUnitNumber(filename) {
   const match = filename.match(/^(\d+)\.md$/);
   return match ? parseInt(match[1], 10) : 0;
 }
@@ -38,14 +39,14 @@ function markdownToHTML(markdown) {
   // Post-process: Convert [N] to <sup>[N]</sup> for footnotes
   html = html.replace(/\[(\d+)\]/g, '<sup>[$1]</sup>');
 
-  // Post-process: Convert internal references like [Technological Approach] to links
-  html = html.replace(/\[Technological Approach\]/g, '<a href="/technological_approach.html">Technological Approach</a>');
+  // Post-process: Convert internal references to links
+  html = html.replace(/\[Artificial Wisdom Research\]/g, '<a href="/artificial_wisdom_research.html">Artificial Wisdom Research</a>');
 
   return html;
 }
 
 // Generate header HTML with navigation
-function generateHeader(blogDropdown, iconPath = '') {
+function generateHeader(iconPath = '') {
   return `    <header>
         <div class="header-container">
             <div class="header-left">
@@ -55,13 +56,7 @@ function generateHeader(blogDropdown, iconPath = '') {
             <nav class="header-nav">
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="static-link" onclick="return false;" aria-haspopup="true">Blog</a>
-                        <ul class="dropdown-menu">
-${blogDropdown}
-                        </ul>
-                    </li>
-                    <li><a href="/technological_approach.html">Technological Approach</a></li>
+                    <li><a href="/artificial_wisdom_research.html">Artificial Wisdom Research</a></li>
                     <li><a href="https://pro.maximilien.leclei.net" target="_blank" rel="noopener noreferrer">Professional Site</a></li>
                 </ul>
             </nav>
@@ -126,8 +121,7 @@ function generateSocialLinks() {
 function generateHTMLPage(content, metadata) {
   const {
     title = 'Maximilien Le Cleï',
-    description = "Personal website",
-    blogDropdown = '',
+    description = 'Personal website',
     iconPath = '',
     cssPath = ''
   } = metadata;
@@ -147,7 +141,7 @@ function generateHTMLPage(content, metadata) {
     <link rel="stylesheet" href="${cssPath}styles.css">
 </head>
 <body>
-${generateHeader(blogDropdown, iconPath)}
+${generateHeader(iconPath)}
 
 ${generateSocialLinks()}
 
@@ -159,54 +153,28 @@ ${content}
 `;
 }
 
-// Generate blog dropdown menu HTML
-function generateBlogDropdown(blogFiles) {
-  // Sort by number (newest first: 10, 9, 8, ...)
-  const sortedBlogs = blogFiles
-    .map(file => ({
-      file,
-      num: extractBlogNumber(file),
-      title: extractTitle(readMarkdown(path.join(BLOG_DIR, file)))
-    }))
-    .filter(blog => blog.num > 0)
-    .sort((a, b) => b.num - a.num);
-
-  // CHANGED: Removed ${blog.num}. from the template string below
-  return sortedBlogs
-    .map(blog => `                    <li><a href="/blog/${blog.file.replace('.md', '.html')}">${blog.title}</a></li>`)
-    .join('\n');
-}
-
 // Generate homepage
-function generateHomepage(blogFiles, blogDropdown) {
+function generateHomepage(unitFiles) {
   console.log('Generating homepage...');
 
-  // Read introduction from main.md
   const mainMd = readMarkdown(path.join(MARKDOWN_DIR, 'main.md'));
   const introHTML = markdownToHTML(mainMd);
 
-  // Get all blog posts in reverse order (10 -> 1)
-  const sortedBlogs = blogFiles
+  const sortedUnits = unitFiles
     .map(file => ({
-      file,
-      num: extractBlogNumber(file),
-      markdown: readMarkdown(path.join(BLOG_DIR, file))
+      num: extractUnitNumber(file),
+      markdown: readMarkdown(path.join(UNITS_DIR, file))
     }))
-    .filter(blog => blog.num > 0)
+    .filter(unit => unit.num > 0)
     .sort((a, b) => b.num - a.num);
 
-  // Build blog posts HTML
-  const blogPostsHTML = sortedBlogs.map((blog, index) => {
-    const title = extractTitle(blog.markdown);
-    const content = markdownToHTML(blog.markdown);
-
-    // Remove the h1 heading from content (we'll use h2 in the article)
+  const unitPostsHTML = sortedUnits.map((unit, index) => {
+    const title = extractTitle(unit.markdown);
+    const content = markdownToHTML(unit.markdown);
     const contentWithoutTitle = content.replace(/<h1>.*?<\/h1>/, '');
+    const separator = index < sortedUnits.length - 1 ? '            <hr class="blog-separator">\n\n' : '';
 
-    const separator = index < sortedBlogs.length - 1 ? '            <hr class="blog-separator">\n\n' : '';
-
-    // CHANGED HERE: I removed "${blog.num}. " from the <h2> tag below
-    return `            <article class="blog-post" id="post-${blog.num}">
+    return `            <article class="blog-post" id="${unit.num}">
                 <h2>${title}</h2>
                 <div class="blog-content">
 ${contentWithoutTitle}                </div>
@@ -218,132 +186,51 @@ ${separator}`;
   const content = `        <section class="introduction">
 ${introHTML}        </section>
 
-        <section class="blog-posts" id="blog">
-${blogPostsHTML}        </section>`;
+        <section class="blog-posts" id="units">
+${unitPostsHTML}        </section>`;
 
   const html = generateHTMLPage(content, {
     title: 'Maximilien Le Cleï',
-    description: "Personal website",
-    blogDropdown
+    description: 'Personal website'
   });
 
   fs.writeFileSync('index.html', html);
   console.log('✓ Generated index.html');
 }
 
-// Generate technological approach page
-function generateTechApproachPage(blogDropdown) {
-  console.log('Generating technological approach page...');
+// Generate research page
+function generateResearchPage() {
+  console.log('Generating artificial wisdom research page...');
 
-  const techMd = readMarkdown(path.join(MARKDOWN_DIR, 'technological_approach.md'));
-  const techHTML = markdownToHTML(techMd);
-
-  // Remove the h1 heading from content (we'll wrap in article with proper heading)
-  const contentWithoutTitle = techHTML.replace(/<h1>.*?<\/h1>/, '');
-
+  const researchMd = readMarkdown(RESEARCH_FILE);
+  const researchHTML = markdownToHTML(researchMd);
   const content = `        <article class="tech-approach">
-            <h2>Technological Approach</h2>
-${contentWithoutTitle}        </article>`;
+${researchHTML}        </article>`;
 
   const html = generateHTMLPage(content, {
-    title: 'Technological Approach - Maximilien Le Cleï',
-    description: "Technological Approach",
-    blogDropdown
+    title: 'Artificial Wisdom Research - Maximilien Le Cleï',
+    description: 'Artificial Wisdom Research'
   });
 
-  fs.writeFileSync('technological_approach.html', html);
-  console.log('✓ Generated technological_approach.html');
+  fs.writeFileSync('artificial_wisdom_research.html', html);
+  console.log('✓ Generated artificial_wisdom_research.html');
 }
 
-// Generate individual blog page
-function generateBlogPage(blogFile, allBlogFiles, blogDropdown) {
-  const blogNum = extractBlogNumber(blogFile);
-  const blogMd = readMarkdown(path.join(BLOG_DIR, blogFile));
-  const title = extractTitle(blogMd);
-  const blogHTML = markdownToHTML(blogMd);
-
-  // Remove the h1 heading (we'll add it back properly)
-  const contentWithoutTitle = blogHTML.replace(/<h1>.*?<\/h1>/, '');
-
-  // Get sorted blog numbers for prev/next navigation
-  const blogNumbers = allBlogFiles
-    .map(f => extractBlogNumber(f))
-    .filter(n => n > 0)
-    .sort((a, b) => a - b);
-
-  const currentIndex = blogNumbers.indexOf(blogNum);
-  const prevNum = currentIndex > 0 ? blogNumbers[currentIndex - 1] : null;
-  const nextNum = currentIndex < blogNumbers.length - 1 ? blogNumbers[currentIndex + 1] : null;
-
-  // Build navigation links
-  let navHTML = '        <nav class="post-nav">\n';
-  if (prevNum) {
-    const prevFile = allBlogFiles.find(f => extractBlogNumber(f) === prevNum);
-    const prevTitle = extractTitle(readMarkdown(path.join(BLOG_DIR, prevFile)));
-    navHTML += `            <a href="/blog/${prevNum.toString().padStart(2, '0')}.html">← Previous: ${prevNum}. ${prevTitle}</a>\n`;
-  } else {
-    navHTML += '            <span></span>\n';
-  }
-
-  if (nextNum) {
-    const nextFile = allBlogFiles.find(f => extractBlogNumber(f) === nextNum);
-    const nextTitle = extractTitle(readMarkdown(path.join(BLOG_DIR, nextFile)));
-    navHTML += `            <a href="/blog/${nextNum.toString().padStart(2, '0')}.html">Next: ${nextNum}. ${nextTitle} →</a>\n`;
-  }
-  navHTML += '        </nav>';
-
-  const content = `        <article class="blog-post-single">
-            <h1>${blogNum}. ${title}</h1>
-            <div class="blog-content">
-${contentWithoutTitle}            </div>
-        </article>
-
-${navHTML}`;
-
-  const html = generateHTMLPage(content, {
-    title: `${blogNum}. ${title} - Maximilien Le Cleï`,
-    description: blogMd.substring(0, 150).replace(/\n/g, ' '),
-    blogDropdown,
-    iconPath: '../',
-    cssPath: '../'
-  });
-
-  const blogDir = 'blog';
-  if (!fs.existsSync(blogDir)) {
-    fs.mkdirSync(blogDir, { recursive: true });
-  }
-
-  const outputFile = path.join(blogDir, blogFile.replace('.md', '.html'));
-  fs.writeFileSync(outputFile, html);
-  console.log(`✓ Generated ${outputFile}`);
-}
-
-// Main function
 function main() {
   console.log('Starting HTML generation from markdown...\n');
 
-  // Get all blog files (exclude drafts.md)
-  const blogFiles = fs.readdirSync(BLOG_DIR)
+  const unitFiles = fs.readdirSync(UNITS_DIR)
     .filter(f => f.endsWith('.md') && f !== 'drafts.md')
     .sort();
 
-  console.log(`Found ${blogFiles.length} blog posts\n`);
+  console.log(`Found ${unitFiles.length} units\n`);
 
-  // Generate blog dropdown menu
-  const blogDropdown = generateBlogDropdown(blogFiles);
-
-  // Generate all pages
-  generateHomepage(blogFiles, blogDropdown);
-  generateTechApproachPage(blogDropdown);
-
-  blogFiles.forEach(blogFile => {
-    generateBlogPage(blogFile, blogFiles, blogDropdown);
-  });
+  generateHomepage(unitFiles);
+  generateResearchPage();
 
   console.log('\n✅ All HTML files generated successfully!');
 }
 
-// Run
 try {
   main();
 } catch (error) {

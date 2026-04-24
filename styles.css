@@ -172,6 +172,11 @@ main {
   text-decoration: none;
 }
 
+.blog-post-title:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
 .blog-post-title:hover {
   opacity: 0.7;
 }

@@ -181,7 +181,7 @@ function generateHomepage(unitFiles) {
     const separator = index < sortedUnits.length - 1 ? '            <hr class="blog-separator">\n\n' : '';
 
     return `            <article class="blog-post" id="${unit.num}">
-                <h2>${title}</h2>
+                <h2><a href="/#${unit.num}" class="blog-post-title">${title}</a></h2>
                 <div class="blog-content">
 ${contentWithoutTitle}                </div>
             </article>

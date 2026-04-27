@@ -62,7 +62,7 @@ function generateHeader(iconPath = '') {
             <nav class="header-nav">
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="https://docs.google.com/document/d/1-KIiNGMy1H9vbI5i4cydxE4c91qCeAlv6mKCrAJa3AM/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Manifesto (Google Docs with comments enabled)</a></li>
+                    <li><a href="https://docs.google.com/document/d/1-KIiNGMy1H9vbI5i4cydxE4c91qCeAlv6mKCrAJa3AM/edit?usp=sharing" target="_blank" rel="noopener noreferrer">In-Progress Manifesto (Google Docs with comments enabled)</a></li>
                     <li><a href="/artificial_wisdom_research.html">Artificial Wisdom Research</a></li>
                     <li><a href="https://pro.maximilien.leclei.net" target="_blank" rel="noopener noreferrer">Professional Site</a></li>
                 </ul>

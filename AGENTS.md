@@ -10,6 +10,16 @@ This is a personal philosophy website for Maximilien Le Cleï, hosted on GitHub 
 - Dark theme matching professional site (#000000 black background)
 - Automated markdown-to-HTML conversion pipeline
 
+## Commit and Push Policy
+
+When the user asks for a code, content, style, build, or configuration change, complete the full workflow by default:
+- Make the requested changes
+- Run the appropriate local build/test/verification when available
+- Commit the changed files with a clear message
+- Push the commit to the current tracked branch
+
+Do not wait for a separate "commit" or "push" request unless the user explicitly says not to commit/push, asks for a draft-only change, or the work is purely exploratory/read-only.
+
 ## Key Files
 
 ### Source Files (Markdown - EDIT THESE)

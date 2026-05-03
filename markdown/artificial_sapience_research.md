@@ -1,12 +1,14 @@
-I believe we have enough artificial intelligence at this point in time, and not enough artificial sapience. You can find my attempts at finding some over at https://github.com/maximilienleclei/artificial_sapience_research
+I believe we have enough artificial intelligence at this point in time, and not enough artificial wisdom and understanding. These three terms fall under the umbrella of sapience. You can find my attempt at restoring that balance over at https://github.com/maximilienleclei/artificial_sapience_research
 
 ---
 
+How did I get here?
+
 ## 2015-2017
 
-In my early adult years, I believed that all my problems were solvable by advanced enough technology. 
+In my early adult years, I believed that my fundamental problems were solvable by advanced enough technology.
 
-I remember wanting to live forever back then.  I felt like my life was incredibly unfulfilling and that I just needed enough time and effort to witness/create the sufficient technological progress to finally feel fulfilled. I remember being quite fond of the idea of creating world simulations that my self would not be able to differentiate from reality so that I could experience different lives. I also remember wanting to explore space in my own little spatial shuttle.
+I remember wanting to live forever back then.  I felt like my life was incredibly unfulfilling and that I just needed enough time and effort to witness/create the sufficient technological progress to finally feel fulfilled. I remember being quite fond of the idea of creating world simulations that my self would not be able to differentiate from reality so that I could experience different lives. I also remember wanting to explore space in my own little space shuttle.
 
 I discovered AI around that time. Instead of creating all of this technology, why not create AI that itself would create all of this technology for me?
 
@@ -24,8 +26,8 @@ I went on to spend my pre-ChatGPT research years working on scaling simple evolu
 
 Post-ChatGPT however, it became undeniable that certain deep learning methods, given enough data - capacity - compute, could produce models that really nicely model their training dataset, and that I should figure out a way to build on top of these capabilities.
 
-## now
+## 2026-
 
-Needing external outcomes to reach inner satisfaction was quite painful. Nowadays, I luckily no longer yearn for immortality nor life simulators nor space exploration. Lucky for me, I've found fulfilment that is independent of future technological progress. However, over time. as this process of detaching myself from these desires took place, I entered the uncomfortable process of losing the reason why I even started AI in the first place.
+Needing external outcomes to reach inner satisfaction was quite painful. Nowadays, I luckily no longer yearn for immortality nor life simulators nor space exploration. Lucky for me, I've found fulfilment that is independent of future technological progress. However, over time, as this process of detaching myself from these desires took place, I entered the uncomfortable process of losing my career's raison d'être.
 
 More recently however, I have started believing that like any other skill, I can put this skill to good use on my path to unconditional universal love. This how my research on artificial sapience thus came to be.

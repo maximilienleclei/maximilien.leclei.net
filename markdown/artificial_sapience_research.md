@@ -1,4 +1,4 @@
-I believe we have enough artificial intelligence at this point in time, and not enough artificial wisdom. You can find my attempts at finding some over at https://github.com/maximilienleclei/artificial_wisdom_research
+I believe we have enough artificial intelligence at this point in time, and not enough artificial sapience. You can find my attempts at finding some over at https://github.com/maximilienleclei/artificial_sapience_research
 
 ---
 
@@ -28,4 +28,4 @@ Post-ChatGPT however, it became undeniable that certain deep learning methods, g
 
 Needing external outcomes to reach inner satisfaction was quite painful. Nowadays, I luckily no longer yearn for immortality nor life simulators nor space exploration. Lucky for me, I've found fulfilment that is independent of future technological progress. However, over time. as this process of detaching myself from these desires took place, I entered the uncomfortable process of losing the reason why I even started AI in the first place.
 
-More recently however, I have started believing that like any other skill, I can put this skill to good use on my path to unconditional universal love. This how my research on artificial wisdom thus came to be.
+More recently however, I have started believing that like any other skill, I can put this skill to good use on my path to unconditional universal love. This how my research on artificial sapience thus came to be.

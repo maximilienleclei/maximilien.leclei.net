@@ -13,7 +13,7 @@ const md = new MarkdownIt({
 // Directories
 const MARKDOWN_DIR = 'markdown';
 const UNITS_DIR = path.join(MARKDOWN_DIR, 'units');
-const RESEARCH_FILE = path.join(MARKDOWN_DIR, 'artificial_wisdom_research.md');
+const RESEARCH_FILE = path.join(MARKDOWN_DIR, 'artificial_sapience_research.md');
 
 // Helper: Read markdown file
 function readMarkdown(filepath) {
@@ -46,7 +46,7 @@ function markdownToHTML(markdown) {
   );
 
   // Post-process: Convert internal references to links
-  html = html.replace(/\[Artificial Wisdom Research\]/g, '<a href="/artificial_wisdom_research.html">Artificial Wisdom Research</a>');
+  html = html.replace(/\[Artificial Sapience Research\]/g, '<a href="/artificial_sapience_research.html">Artificial Sapience Research</a>');
 
   return html;
 }
@@ -62,7 +62,7 @@ function generateHeader(iconPath = '') {
             <nav class="header-nav">
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="/artificial_wisdom_research.html">Artificial Wisdom Research</a></li>
+                    <li><a href="/artificial_sapience_research.html">Artificial Sapience Research</a></li>
                     <li><a href="https://pro.maximilien.leclei.net" target="_blank" rel="noopener noreferrer">Professional Site</a></li>
                 </ul>
             </nav>
@@ -206,7 +206,7 @@ ${unitPostsHTML}        </section>`;
 
 // Generate research page
 function generateResearchPage() {
-  console.log('Generating artificial wisdom research page...');
+  console.log('Generating artificial sapience research page...');
 
   const researchMd = readMarkdown(RESEARCH_FILE);
   const researchHTML = markdownToHTML(researchMd);
@@ -214,12 +214,12 @@ function generateResearchPage() {
 ${researchHTML}        </article>`;
 
   const html = generateHTMLPage(content, {
-    title: 'Artificial Wisdom Research - Maximilien Le Cleï',
-    description: 'Artificial Wisdom Research'
+    title: 'Artificial Sapience Research - Maximilien Le Cleï',
+    description: 'Artificial Sapience Research'
   });
 
-  fs.writeFileSync('artificial_wisdom_research.html', html);
-  console.log('✓ Generated artificial_wisdom_research.html');
+  fs.writeFileSync('artificial_sapience_research.html', html);
+  console.log('✓ Generated artificial_sapience_research.html');
 }
 
 function main() {
